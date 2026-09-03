@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mezi námi – aplikace na povídání pro rodiče a děti</title>
+<meta name="description" content="Karty s otázkami pro rodiče a děti od 6 do 9 let. Odpovídáte oba, nahlas. Zdarma, bez reklam, vše zůstává jen ve vašem telefonu.">
+<meta name="theme-color" content="#FAF4EC">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mezi námi – Buďte si blíž. Stačí se dobře zeptat.">
+<meta property="og:description" content="Aplikace s kartami, díky kterým si s dítětem popovídáte i o tom, na co se doma běžně nedostane. Zdarma, bez reklam.">
+<meta property="og:locale" content="cs_CZ">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+    :root{
+      --font-display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+      --font-body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      --shadow-card:0 2px 6px rgba(51,38,31,.06),0 12px 32px rgba(51,38,31,.08);
+      --shadow-float:0 4px 12px rgba(51,38,31,.10),0 24px 56px rgba(51,38,31,.14);
+    }
+    html{color-scheme:light}
+    x-dc{display:block}
+    *{box-sizing:border-box}
+    body{margin:0;background:#FAF4EC;color:#33261F;font-family:var(--font-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+    a{color:#33261F;text-decoration:none}a:hover{color:#6E3B52}
+    p{margin:0;text-wrap:pretty}
+    h1,h2,h3{margin:0;text-wrap:balance}
+    .display{font-family:var(--font-display);font-weight:400;letter-spacing:-.015em;line-height:1.08}
+    .wrap{max-width:1160px;margin:0 auto;padding-left:40px;padding-right:40px}
+    .btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-body);font-size:16px;font-weight:600;border:none;border-radius:999px;padding:16px 28px;min-height:52px;cursor:pointer;text-decoration:none;transition:transform .12s ease,background .15s ease,box-shadow .15s ease,color .15s ease}
+    .btn:active{transform:scale(.97)}
+    .btn-primary{background:#6E3B52;color:#fff;box-shadow:0 6px 18px rgba(110,59,82,.30)}
+    .btn-primary:hover{background:#572E41;color:#fff}
+    .btn-secondary{background:transparent;color:#6E3B52;border:1.5px solid rgba(110,59,82,.35)}
+    .btn-secondary:hover{background:#F0E2E9;color:#6E3B52}
+    .btn-paper{background:#FAF4EC;color:#572E41;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+    .btn-paper:hover{background:#fff;color:#572E41}
+    .btn-small{padding:10px 18px;min-height:40px;font-size:15px}
+    .eyebrow{font-size:14px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#C08A2D}
+    .ico{width:20px;height:20px;flex:none}
+    .panel{background:#F3EAE0;border-radius:28px;min-height:520px;display:flex;align-items:center;justify-content:center;padding:56px 48px;position:relative;overflow:hidden}
+    .qcard{position:relative;background:#fff;border-radius:18px;box-shadow:var(--shadow-float);padding:12px;display:flex;flex-direction:column}
+    .qcard-inner{flex:1;border:1px solid #EAD9B8;border-radius:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:28px 20px 44px}
+    .qcard-quote{font-family:var(--font-display);font-size:44px;line-height:.6;color:#C08A2D;opacity:.4}
+    .qcard-q{font-family:var(--font-display);font-weight:600;font-size:22px;line-height:1.3;color:#33261F;margin-top:16px;text-wrap:balance}
+    .qcard-label{position:absolute;left:0;right:0;bottom:26px;text-align:center;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#A99A8E;font-weight:600}
+    .back{border-radius:18px;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.16),transparent 55%),linear-gradient(150deg,#6E3B52 0%,#572E41 100%);box-shadow:var(--shadow-card),inset 0 0 0 5px rgba(250,244,236,.22);color:#F6EBD3;font-family:var(--font-display);font-size:58px;font-weight:600;display:flex;align-items:center;justify-content:center}
+    .fu{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed #E3CDBB;font-size:16px;line-height:1.45;text-align:left}
+    .fu:last-of-type{border-bottom:none}
+    .fu-n{width:26px;height:26px;border-radius:50%;background:#F7E5DF;color:#C96F5B;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
+    .pill{padding:10px 16px;border-radius:999px;background:#fff;font-size:15px;font-weight:500;color:#33261F;box-shadow:var(--shadow-card);display:inline-flex;align-items:center;gap:10px}
+    .dot{width:10px;height:10px;border-radius:50%;flex:none}
+    .faq{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding:24px 0;border-top:1px solid #E8D9CB}
+    .faq h3{font-family:var(--font-display);font-weight:400;font-size:24px;line-height:1.25}
+    .faq p{font-size:17px;color:#7A6A5F;margin-top:10px;max-width:640px}
+    .plus{width:36px;height:36px;border-radius:50%;border:1px solid #E3CDBB;display:flex;align-items:center;justify-content:center;flex:none;color:#7A6A5F}
+    @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+    .rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+    .d1{animation-delay:.12s}.d2{animation-delay:.24s}.d3{animation-delay:.4s}.d4{animation-delay:.6s}
+    @keyframes floaty{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-8px)}}
+    .floaty{animation:floaty 6s ease-in-out infinite}
+    .lift{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
+    .lift:hover{transform:translateY(-6px);box-shadow:var(--shadow-float)}
+    @media (prefers-reduced-motion:reduce){.rise,.floaty{animation:none}.lift{transition:none}}
+    @media (max-width:900px){
+      .wrap{padding-left:20px;padding-right:20px}
+      .h1{font-size:44px !important}
+      .h2{font-size:34px !important}
+      .grid3,.two{grid-template-columns:1fr !important}
+      .hero-panel{min-height:820px !important;padding:72px 24px 320px !important}
+      .contrast{flex-direction:column !important;gap:28px !important}
+      .contrast .qcard{width:100% !important;max-width:320px;height:auto !important;min-height:340px}
+      .contrast > svg{transform:rotate(90deg)}
+      .panel{padding:40px 20px !important;min-height:0 !important}
+      .navlinks{display:none !important}
+    }
+    details.faq{padding:0;display:block}
+    details.faq summary{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding:24px 0;cursor:pointer;list-style:none}
+    details.faq summary::-webkit-details-marker{display:none}
+    details.faq p{margin:-8px 0 24px}
+    details.faq .plus{transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+    details.faq[open] .plus{transform:rotate(180deg)}
+    details.faq[open] .plus .v{display:none}
+    details.faq:last-of-type{border-bottom:1px solid #E8D9CB}
+    .skip{position:absolute;left:-9999px}
+
+</style>
+</head>
+<body>
+<div style="background:#FAF4EC">
+
+  <!-- Navigace -->
+  <header class="wrap" style="display:flex;align-items:center;justify-content:space-between;height:84px">
+    <a href="#" style="display:flex;align-items:center;gap:12px;color:#33261F">
+      <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><circle cx="26" cy="32" r="18" fill="#6E3B52"></circle><circle cx="41" cy="36" r="12" fill="#C08A2D" style="mix-blend-mode:multiply"></circle></svg>
+      <span style="font-family:var(--font-display);font-weight:600;font-size:22px;letter-spacing:-.01em;white-space:nowrap">Mezi námi</span>
+    </a>
+    <nav class="navlinks" style="display:flex;gap:32px;font-size:16px;font-weight:500">
+      <a href="#co" style="color:#7A6A5F">Co umí</a>
+      <a href="#jak" style="color:#7A6A5F">Jak to funguje</a>
+      <a href="#faq" style="color:#7A6A5F">Otázky a odpovědi</a>
+    </nav>
+    <a class="btn btn-primary btn-small" href="https://apps.apple.com/cz/app/id6791562078">Stáhnout pro iPhone</a>
+  </header>
+
+  <!-- Hero: velký panel místo videa -->
+  <section style="padding:8px 24px 0">
+    <div class="hero-panel rise" style="position:relative;min-height:880px;border-radius:32px;overflow:hidden;background:radial-gradient(ellipse at 20% 15%,rgba(255,255,255,.14),transparent 50%),radial-gradient(ellipse at 85% 90%,rgba(192,138,45,.28),transparent 55%),linear-gradient(160deg,#6E3B52 0%,#572E41 100%);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:104px 40px 330px;color:#FAF4EC">
+      <span class="rise d1" style="display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid rgba(250,244,236,.35);color:rgba(250,244,236,.9);font-size:14px;font-weight:600">Pro rodiče a děti od 6 do 9 let</span>
+      <h1 class="display h1 rise d2" style="font-size:78px;color:#FAF4EC;margin-top:28px;max-width:900px">Buďte si blíž.<br>Stačí se dobře zeptat.</h1>
+      <p class="rise d3" style="font-size:21px;line-height:1.5;color:rgba(250,244,236,.8);margin-top:24px;max-width:560px">Aplikace s kartami, díky kterým si s dítětem popovídáte i o tom, na co se doma běžně nedostane. Odpovídáte oba, nahlas.</p>
+      <div class="rise d4" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px">
+        <a class="btn btn-paper" href="https://apps.apple.com/cz/app/id6791562078">Stáhnout pro iPhone</a>
+        <a class="btn" href="https://dalikjebuh-coder.github.io/mezi-nami-deti/" style="background:transparent;color:#FAF4EC;border:1.5px solid rgba(250,244,236,.45)">Otevřít v prohlížeči</a>
+      </div>
+      <p class="rise d4" style="font-size:15px;color:rgba(250,244,236,.6);margin-top:18px">Zdarma, bez reklam. Vše zůstává jen ve vašem telefonu.</p>
+
+      <!-- stav z appky: téma, hloubka, pořadí karty -->
+      <div class="rise d4" style="position:absolute;top:32px;right:32px;display:inline-flex;align-items:center;gap:10px;padding:10px 14px 10px 12px;border-radius:999px;background:rgba(250,244,236,.14);border:1px solid rgba(250,244,236,.22);color:#FAF4EC;font-size:14px;font-weight:500;backdrop-filter:blur(6px)">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#E8A93D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"></path><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"></path><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"></path><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path></svg>
+        Škola · Na rozehřátí · 1/3
+      </div>
+
+      <!-- karta vystupující z panelu -->
+      <div class="qcard floaty" style="position:absolute;left:50%;bottom:-70px;width:250px;height:340px;margin-left:-125px;transform:rotate(-3deg)">
+        <div class="qcard-inner">
+          <span class="qcard-quote">„</span>
+          <p class="qcard-q">Co se ti dneska povedlo? Klidně maličkost.</p>
+        </div>
+        <span class="qcard-label">Škola · Na rozehřátí</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Velké tvrzení -->
+  <section id="co" class="wrap" style="padding-top:176px;padding-bottom:72px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:20px">
+    <h2 class="display h2" style="font-size:52px;color:#33261F;max-width:820px">Pět minut u večeře, jedna karta a rozhovor, na který by jinak nedošlo.</h2>
+    <p style="font-size:20px;color:#7A6A5F;max-width:560px">Nic se nepíše ani nehodnotí. Prostě si spolu povídáte.</p>
+  </section>
+
+  <!-- Moment 1: ptá se jinak -->
+  <section class="wrap" style="padding-bottom:40px;display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px;max-width:640px">
+      <span class="eyebrow">Ptá se jinak</span>
+      <h3 class="display" style="font-size:34px;color:#33261F">Na „jak bylo“ se odpovídá „dobrý“.</h3>
+      <p style="font-size:18px;color:#7A6A5F">Karty se ptají konkrétně, takže se na ně dá odpovědět jenom doopravdy. A protože odpovídáte oba, dozví se i dítě něco o vás.</p>
+    </div>
+    <div class="panel">
+      <div class="contrast" style="display:flex;align-items:center;gap:56px">
+        <div style="display:flex;flex-direction:column;gap:14px;width:300px">
+          <div style="align-self:flex-start;background:#fff;border-radius:18px 18px 18px 6px;padding:14px 18px;font-size:17px;box-shadow:var(--shadow-card)">Jak bylo ve škole?</div>
+          <div style="align-self:flex-end;background:#E8D9CB;border-radius:18px 18px 6px 18px;padding:14px 18px;font-size:17px;color:#7A6A5F">Dobrý.</div>
+          <div style="align-self:flex-start;background:#fff;border-radius:18px 18px 18px 6px;padding:14px 18px;font-size:17px;box-shadow:var(--shadow-card)">A jinak?</div>
+          <div style="align-self:flex-end;background:#E8D9CB;border-radius:18px 18px 6px 18px;padding:14px 18px;font-size:17px;color:#7A6A5F">Nic.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;color:#A99A8E">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          <span style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600">místo toho</span>
+        </div>
+        <div class="qcard lift" style="width:260px;height:356px;flex:none;transform:rotate(2deg)">
+          <div class="qcard-inner">
+            <span class="qcard-quote">„</span>
+            <p class="qcard-q" style="font-size:24px">Bál/a ses někdy říct, že něčemu nerozumíš?</p>
+          </div>
+          <span class="qcard-label">Škola · S kouskem odvahy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Moment 2: drží rozhovor v chodu -->
+  <section class="wrap" style="padding-top:56px;padding-bottom:40px;display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px;max-width:640px">
+      <span class="eyebrow">Drží rozhovor v chodu</span>
+      <h3 class="display" style="font-size:34px;color:#33261F">Když to zadrhne, otočíte kartu.</h3>
+      <p style="font-size:18px;color:#7A6A5F">Na rubu jsou tři otázky navíc, kterými se dá pokračovat, a jemnější znění pro dny, kdy je téma moc velké.</p>
+    </div>
+    <div class="panel">
+      <div class="contrast" style="display:flex;align-items:center;gap:40px">
+        <div class="qcard lift" style="width:270px;height:370px;flex:none;transform:rotate(-3deg)">
+          <div class="qcard-inner">
+            <span class="qcard-quote">„</span>
+            <p class="qcard-q" style="font-size:24px">Jaké to je, když tě učitel vyvolá a ty nevíš?</p>
+          </div>
+          <span class="qcard-label">Líc</span>
+        </div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#A99A8E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg>
+        <div class="qcard lift" style="width:440px;flex:none;transform:rotate(1.5deg)">
+          <div style="flex:1;border:1px solid #EAD9B8;border-radius:10px;padding:26px 24px 22px;display:flex;flex-direction:column">
+            <span style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#C08A2D;font-weight:600;margin-bottom:4px">Pro hlubší rozhovor</span>
+            <div class="fu"><span class="fu-n">1</span><span>Kdy se ti to naposledy stalo? Co se dělo?</span></div>
+            <div class="fu"><span class="fu-n">2</span><span>Jak nepříjemné to je?</span></div>
+            <div class="fu"><span class="fu-n">3</span><span>Co v tu chvíli cítíš — horko, knedlík v krku, nic?</span></div>
+            <div style="border-top:1px dashed #E3CDBB;margin-top:18px;padding-top:16px">
+              <span style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#C96F5B;font-weight:600">Když nevíš, jak odpovědět</span>
+              <p style="font-style:italic;color:#7A6A5F;font-size:16px;margin-top:6px">Co se ti honí hlavou, když učitel vybírá, koho vyvolá?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Moment 3: vážné a lehké -->
+  <section class="wrap" style="padding-top:56px;padding-bottom:104px;display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px;max-width:640px">
+      <span class="eyebrow">Vážné i lehké</span>
+      <h3 class="display" style="font-size:34px;color:#33261F">Šest témat, každé ve třech hloubkách.</h3>
+      <p style="font-size:18px;color:#7A6A5F">Celkem 108 otázek, k tomu bonusové karty s úkoly a Bleskovky, krátké hry na pár minut. To lehčí je tam schválně, aby si dítě povídání nespojilo jen s vážnými tématy.</p>
+    </div>
+    <div class="panel" style="min-height:420px;flex-direction:column;gap:28px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:820px">
+        <span class="pill"><span class="dot" style="background:#E2EBF0;box-shadow:inset 0 0 0 1px rgba(51,38,31,.08)"></span>Škola</span>
+        <span class="pill"><span class="dot" style="background:#F7E5DF;box-shadow:inset 0 0 0 1px rgba(51,38,31,.08)"></span>Kamarádi</span>
+        <span class="pill"><span class="dot" style="background:#F0E2E9;box-shadow:inset 0 0 0 1px rgba(51,38,31,.08)"></span>Strachy a starosti</span>
+        <span class="pill"><span class="dot" style="background:#E9EDE2;box-shadow:inset 0 0 0 1px rgba(51,38,31,.08)"></span>Naše rodina</span>
+        <span class="pill"><span class="dot" style="background:#E2EBF0;box-shadow:inset 0 0 0 1px rgba(51,38,31,.08)"></span>Telefon a hry</span>
+        <span class="pill"><span class="dot" style="background:#F6EBD3;box-shadow:inset 0 0 0 1px rgba(51,38,31,.08)"></span>Pocity</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;color:#A99A8E;font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">
+        <span style="width:40px;height:1px;background:#E3CDBB"></span>tři hloubky<span style="width:40px;height:1px;background:#E3CDBB"></span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px">
+        <span class="pill" style="background:#fff">Na rozehřátí</span>
+        <span class="pill" style="background:#fff">S kouskem odvahy</span>
+        <span class="pill" style="background:#fff">Úplně upřímně</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px">
+        <span class="pill" style="background:#F6EBD3;box-shadow:none"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#C08A2D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>Bleskovky na ráno, odpoledne i večer</span>
+        <span class="pill" style="background:#F6EBD3;box-shadow:none">Bonusové karty s úkoly</span>
+        <span class="pill" style="background:#F6EBD3;box-shadow:none">Volitelně jedna otázka v neděli večer</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jak to funguje -->
+  <section id="jak" style="background:#F3EAE0;padding:104px 0">
+    <div class="wrap">
+      <h2 class="display h2" style="font-size:44px;color:#33261F;margin-bottom:56px">Jak to probíhá</h2>
+      <div class="grid3" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px">
+        <div style="display:flex;flex-direction:column;gap:16px;padding-top:24px;border-top:1px solid #D9C9B7">
+          <span style="font-family:var(--font-display);font-size:16px;color:#C08A2D;font-weight:600;letter-spacing:.08em">01</span>
+          <h3 class="display" style="font-size:26px">Vyberete téma a hloubku</h3>
+          <p style="font-size:17px;color:#7A6A5F">Vy rozhodnete, kam dnes chcete jít. Na začátek se hodí ta nejlehčí úroveň, aplikace vás nikam netlačí.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;padding-top:24px;border-top:1px solid #D9C9B7">
+          <span style="font-family:var(--font-display);font-size:16px;color:#C08A2D;font-weight:600;letter-spacing:.08em">02</span>
+          <h3 class="display" style="font-size:26px">Dítě si vylosuje kartu</h3>
+          <p style="font-size:17px;color:#7A6A5F">Z vějíře tří karet. Otázku si přečtete oba a oba odpovíte, nejlíp když začne rodič.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;padding-top:24px;border-top:1px solid #D9C9B7">
+          <span style="font-family:var(--font-display);font-size:16px;color:#C08A2D;font-weight:600;letter-spacing:.08em">03</span>
+          <h3 class="display" style="font-size:26px">Plácnete si a losujete dál</h3>
+          <p style="font-size:17px;color:#7A6A5F">Po každé otázce si plácnete. Když to zadrhne, otočíte kartu. Celé to zabere pět až deset minut.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tři pravidla -->
+  <section class="wrap" style="padding-top:104px;padding-bottom:104px;display:flex;flex-direction:column;gap:56px">
+    <div style="display:flex;flex-direction:column;gap:16px;text-align:center;align-items:center">
+      <h2 class="display h2" style="font-size:44px;color:#33261F;max-width:720px">Tři věty, na kterých se domluvíte, než začnete</h2>
+      <p style="font-size:18px;color:#7A6A5F;max-width:600px">Díky nim jde mluvit i o strachu, samotě nebo o tom, když někdo někomu ubližuje. Bez nich by některé otázky byly příliš odvážné.</p>
+    </div>
+    <div class="grid3" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px">
+      <div class="lift" style="background:#fff;border-radius:24px;padding:36px 32px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-display);font-size:44px;line-height:.6;color:#C08A2D;opacity:.5">„</span>
+        <h3 class="display" style="font-size:28px">Za pravdu se nezlobíme.</h3>
+        <p style="font-size:17px;color:#7A6A5F">Každá odpověď je v pořádku.</p>
+      </div>
+      <div class="lift" style="background:#fff;border-radius:24px;padding:36px 32px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-display);font-size:44px;line-height:.6;color:#C08A2D;opacity:.5">„</span>
+        <h3 class="display" style="font-size:28px">Necháme domluvit.</h3>
+        <p style="font-size:17px;color:#7A6A5F">Kdo mluví, toho posloucháme až do konce.</p>
+      </div>
+      <div class="lift" style="background:#fff;border-radius:24px;padding:36px 32px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:var(--font-display);font-size:44px;line-height:.6;color:#C08A2D;opacity:.5">„</span>
+        <h3 class="display" style="font-size:28px">Stačí říct „dost“.</h3>
+        <p style="font-size:17px;color:#7A6A5F">Když je téma nepříjemné, kdykoliv přestaneme.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Otázky a odpovědi -->
+  <section id="faq" style="background:#F3EAE0;padding:104px 0">
+    <div class="wrap two" style="display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start">
+      <h2 class="display h2" style="font-size:44px;color:#33261F">Otázky a odpovědi</h2>
+      <div style="display:flex;flex-direction:column">
+        <details class="faq" open><summary><h3>Pro jaký věk je to určené?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Otázky jsou psané pro děti zhruba od šesti do devíti let, ale hranice nejsou pevné. Zkuste to a uvidíte. Odpovídá vždycky i rodič, takže je to společné pro oba.</p></details>
+        <details class="faq"><summary><h3>Ukládají se někam naše odpovědi?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Ne. Mluvíte nahlas, appka nic nezapisuje ani neodesílá. V telefonu zůstávají jen jména, která zadáte, a přehled, které otázky už máte za sebou.</p></details>
+        <details class="faq"><summary><h3>Kolik to stojí?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Nic. Appka je zdarma, bez reklam a bez plateb. Nestojí za ní firma, jen jeden táta.</p></details>
+        <details class="faq"><summary><h3>Funguje bez internetu?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Ano. Po prvním spuštění už připojení nepotřebuje a nic neposílá ven.</p></details>
+        <details class="faq"><summary><h3>Mám Android. Co teď?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Otevřete aplikaci v prohlížeči a přidejte si ji na plochu, funguje pak stejně jako nainstalovaná, i bez internetu. Verze pro Google Play se připravuje.</p></details>
+        <details class="faq"><summary><h3>Nahrazuje to odbornou pomoc?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Ne. Je to pomocník pro společné povídání, ne náhrada psychologické, terapeutické nebo lékařské péče. Kontakty na Linku bezpečí a další pomoc najdete přímo v aplikaci.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Závěrečná výzva -->
+  <section class="wrap" style="padding-top:128px;padding-bottom:112px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px">
+    <h2 class="display h2" style="font-size:60px;color:#33261F;max-width:760px">Zkuste jednu kartu ještě dneska večer.</h2>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px">
+      <a class="btn btn-primary" href="https://apps.apple.com/cz/app/id6791562078">Stáhnout pro iPhone</a>
+      <a class="btn btn-secondary" href="https://dalikjebuh-coder.github.io/mezi-nami-deti/">Otevřít v prohlížeči</a>
+    </div>
+    <p style="font-size:15px;color:#A99A8E;max-width:520px">Zdarma, bez reklam. Vše zůstává jen ve vašem telefonu.</p>
+  </section>
+
+  <!-- Patička -->
+  <footer style="border-top:1px solid #E8D9CB">
+    <div class="wrap" style="padding-top:40px;padding-bottom:48px;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:15px;color:#7A6A5F">
+        <span>Mezi námi: rodiče a děti · jeden táta, ne firma</span>
+        <div style="display:flex;gap:24px">
+          <a href="https://dalikjebuh-coder.github.io/mezi-nami-deti/podpora.html" style="color:#7A6A5F">Podpora</a>
+          <a href="https://dalikjebuh-coder.github.io/mezi-nami-deti/soukromi.html" style="color:#7A6A5F">Zásady ochrany soukromí</a>
+          <a href="mailto:font@email.cz" style="color:#7A6A5F">font@email.cz</a>
+          <a href="https://www.linkedin.com/in/dalibor-novak-22787199/" style="color:#7A6A5F">LinkedIn</a>
+        </div>
+      </div>
+      <p style="font-size:14px;color:#A99A8E;max-width:760px">Aplikace je pomocník pro společné povídání a nenahrazuje odbornou psychologickou, terapeutickou ani lékařskou péči. Kontakty na Linku bezpečí a další odbornou pomoc najdete přímo v aplikaci.</p>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
