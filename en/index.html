@@ -104,6 +104,8 @@
     .lang{font-size:15px;font-weight:600;color:#7A6A5F;padding:8px 10px;border-radius:999px;border:1px solid #E3CDBB;white-space:nowrap}
     .hdr-actions{display:flex;align-items:center;gap:10px}
     .lang:hover{color:#33261F;border-color:#D2C1AE}
+    header .btn-small .lbl{display:none}
+    @media (max-width:1059px){.navlinks{display:none !important}}
     @media (max-width:900px){header .btn-small{display:none}}
 
 </style>
@@ -124,8 +126,8 @@
       <a href="#faq" style="color:#7A6A5F">Questions and answers</a>
     </nav>
     <div class="hdr-actions"><a class="lang" href="../" hreflang="cs" lang="cs">Česky</a>
-    <a data-umami-event="store-click-ios" class="btn btn-primary btn-small" href="https://apps.apple.com/app/id6791562078">Download for iPhone</a></div>
-  </header>
+    <a data-umami-event="klik-play-header" class="btn btn-primary btn-small" href="https://play.google.com/store/apps/details?id=com.dalikjebuh.mezinami"><span class="lbl">Download for </span>Android</a>
+    <a data-umami-event="klik-appstore-header" class="btn btn-primary btn-small" href="https://apps.apple.com/app/id6791562078"><span class="lbl">Download for </span>iPhone</a></div></header>
 
   <!-- Hero: velký panel místo videa -->
   <section style="padding:8px 24px 0">
@@ -134,10 +136,10 @@
       <h1 class="display h1 rise d2" style="font-size:78px;color:#FAF4EC;margin-top:28px;max-width:900px">Get closer.<br>All it takes is the right question.</h1>
       <p class="rise d3" style="font-size:21px;line-height:1.5;color:rgba(250,244,236,.8);margin-top:26px;max-width:620px">What do kids think about, look forward to, and worry about? Try asking a little differently.</p>
       <div class="rise d4" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px">
-        <a data-umami-event="store-click-ios" class="btn btn-paper" href="https://apps.apple.com/app/id6791562078">Download for iPhone</a>
-        <a class="btn" href="https://app.mezi-nami-app.cz/?lang=en" style="background:transparent;color:#FAF4EC;border:1.5px solid rgba(250,244,236,.45)">Open in browser</a>
+        <a data-umami-event="klik-appstore-uvod" class="btn btn-paper" href="https://apps.apple.com/app/id6791562078">Download for iPhone</a>
+        <a data-umami-event="klik-play-uvod" class="btn btn-paper" href="https://play.google.com/store/apps/details?id=com.dalikjebuh.mezinami">Download for Android</a>
+        <a data-umami-event="klik-hra-uvod" class="btn" href="https://app.mezi-nami-app.cz/?lang=en" style="background:transparent;color:#FAF4EC;border:1.5px solid rgba(250,244,236,.45)">Open in browser</a>
       </div>
-      <span class="rise d4" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:6px 12px 6px 10px;border-radius:999px;background:rgba(250,244,236,.12);border:1px solid rgba(250,244,236,.18);color:rgba(250,244,236,.85);font-size:14px;font-weight:500"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>Coming soon to Android</span>
       <p class="rise d4" style="font-size:15px;color:rgba(250,244,236,.6);margin-top:18px">Free, no ads. Made by one dad.</p>
       
 
@@ -326,7 +328,7 @@
         <details class="faq reveal" style="--d:0.13s"><summary><h3>Are our answers saved anywhere?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>No. You answer out loud, and the app never saves or sends your answers. All that stays on your device is the names you entered and which questions you've already done.</p></details>
         <details class="faq reveal" style="--d:0.21s"><summary><h3>How much does the app cost?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>It's free, with no ads and no extra payments. One dad built it.</p></details>
         <details class="faq reveal" style="--d:0.29s"><summary><h3>Does it work offline?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Yes. After the first launch you can use it without a connection.</p></details>
-        <details class="faq reveal" style="--d:0.37s"><summary><h3>Can we use it on Android?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Yes, just open it in your browser. You can add it to your home screen and use it offline too. A Google Play version is in the works.</p></details>
+        <details class="faq reveal" style="--d:0.37s"><summary><h3>Can we use it on Android?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Yes, the app is on Google Play too. If you'd rather not install it, open it in your browser and add it to your home screen, and it will work offline as well.</p></details>
         <details class="faq reveal" style="--d:0.45s;border-bottom:1px solid #E8D9CB"><summary><h3>Is the app a substitute for professional help?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>No. The Two of Us helps you start talking. It doesn't replace psychological, therapeutic or medical care. Crisis lines and professional help are listed inside the app.</p></details>
       </div>
     </div>
@@ -337,8 +339,9 @@
     <h2 class="display h2 reveal" style="font-size:60px;color:#33261F;max-width:760px">What will you talk about today?</h2>
     <p class="reveal" style="--d:.12s;font-size:20px;color:#7A6A5F;max-width:520px">Try one card together.</p>
     <div class="reveal" style="--d:.24s;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px">
-      <a data-umami-event="store-click-ios" class="btn btn-primary" href="https://apps.apple.com/app/id6791562078">Download for iPhone</a>
-      <a class="btn btn-secondary" href="https://app.mezi-nami-app.cz/?lang=en">Open in browser</a>
+      <a data-umami-event="klik-appstore-zaver" class="btn btn-primary" href="https://apps.apple.com/app/id6791562078">Download for iPhone</a>
+      <a data-umami-event="klik-play-zaver" class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.dalikjebuh.mezinami">Download for Android</a>
+      <a data-umami-event="klik-hra-zaver" class="btn btn-secondary" href="https://app.mezi-nami-app.cz/?lang=en">Open in browser</a>
     </div>
     <p class="reveal" style="--d:.36s;font-size:15px;color:#A99A8E;max-width:520px">Free, no ads. Your answers are never saved.</p>
   </section>

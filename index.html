@@ -104,6 +104,8 @@
     .lang{font-size:15px;font-weight:600;color:#7A6A5F;padding:8px 10px;border-radius:999px;border:1px solid #E3CDBB;white-space:nowrap}
     .hdr-actions{display:flex;align-items:center;gap:10px}
     .lang:hover{color:#33261F;border-color:#D2C1AE}
+    header .btn-small .lbl{display:none}
+    @media (max-width:1059px){.navlinks{display:none !important}}
     @media (max-width:900px){header .btn-small{display:none}}
 
 </style>
@@ -124,8 +126,8 @@
       <a href="#faq" style="color:#7A6A5F">Otázky a odpovědi</a>
     </nav>
     <div class="hdr-actions"><a class="lang" href="en/" hreflang="en" lang="en">English</a>
-    <a data-umami-event="store-click-ios" class="btn btn-primary btn-small" href="https://apps.apple.com/cz/app/id6791562078">Stáhnout pro iPhone</a></div>
-  </header>
+    <a data-umami-event="klik-play-header" class="btn btn-primary btn-small" href="https://play.google.com/store/apps/details?id=com.dalikjebuh.mezinami"><span class="lbl">Stáhnout pro </span>Android</a>
+    <a data-umami-event="klik-appstore-header" class="btn btn-primary btn-small" href="https://apps.apple.com/cz/app/id6791562078"><span class="lbl">Stáhnout pro </span>iPhone</a></div></header>
 
   <!-- Hero: velký panel místo videa -->
   <section style="padding:8px 24px 0">
@@ -134,10 +136,10 @@
       <h1 class="display h1 rise d2" style="font-size:78px;color:#FAF4EC;margin-top:28px;max-width:900px">Buďte si blíž.<br>Stačí se dobře zeptat.</h1>
       <p class="rise d3" style="font-size:21px;line-height:1.5;color:rgba(250,244,236,.8);margin-top:26px;max-width:620px">O čem děti přemýšlejí, na co se těší a co je trápí? Zkuste se zeptat trochu jinak.</p>
       <div class="rise d4" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px">
-        <a data-umami-event="store-click-ios" class="btn btn-paper" href="https://apps.apple.com/cz/app/id6791562078">Stáhnout pro iPhone</a>
-        <a class="btn" href="https://app.mezi-nami-app.cz/?lang=cs" style="background:transparent;color:#FAF4EC;border:1.5px solid rgba(250,244,236,.45)">Otevřít v prohlížeči</a>
+        <a data-umami-event="klik-appstore-uvod" class="btn btn-paper" href="https://apps.apple.com/cz/app/id6791562078">Stáhnout pro iPhone</a>
+        <a data-umami-event="klik-play-uvod" class="btn btn-paper" href="https://play.google.com/store/apps/details?id=com.dalikjebuh.mezinami">Stáhnout pro Android</a>
+        <a data-umami-event="klik-hra-uvod" class="btn" href="https://app.mezi-nami-app.cz/?lang=cs" style="background:transparent;color:#FAF4EC;border:1.5px solid rgba(250,244,236,.45)">Otevřít v prohlížeči</a>
       </div>
-      <span class="rise d4" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:6px 12px 6px 10px;border-radius:999px;background:rgba(250,244,236,.12);border:1px solid rgba(250,244,236,.18);color:rgba(250,244,236,.85);font-size:14px;font-weight:500"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>Již brzy i pro Android</span>
       <p class="rise d4" style="font-size:15px;color:rgba(250,244,236,.6);margin-top:18px">Zdarma a bez reklam. Vytvořeno jedním tátou.</p>
       
 
@@ -326,7 +328,7 @@
         <details class="faq reveal" style="--d:0.13s"><summary><h3>Ukládají se někam naše odpovědi?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Ne. Odpovídáte si nahlas a aplikace vaše odpovědi neukládá ani neodesílá. V zařízení zůstávají jen zadaná jména a přehled otázek, které už jste prošli.</p></details>
         <details class="faq reveal" style="--d:0.21s"><summary><h3>Kolik aplikace stojí?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Je zdarma, bez reklam a dalších plateb. Vytvořil ji jeden táta.</p></details>
         <details class="faq reveal" style="--d:0.29s"><summary><h3>Funguje i bez internetu?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Ano. Po prvním spuštění ji můžete používat i bez připojení.</p></details>
-        <details class="faq reveal" style="--d:0.37s"><summary><h3>Můžeme ji používat i na Androidu?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Ano, stačí ji otevřít v prohlížeči. Můžete si ji přidat na domovskou obrazovku a používat ji i bez internetu. Verze pro Google Play se připravuje.</p></details>
+        <details class="faq reveal" style="--d:0.37s"><summary><h3>Můžeme ji používat i na Androidu?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Ano, aplikace je i na Google Play. Pokud ji nechcete instalovat, otevřete ji v prohlížeči a přidejte si ji na domovskou obrazovku, bude fungovat i bez internetu.</p></details>
         <details class="faq reveal" style="--d:0.45s;border-bottom:1px solid #E8D9CB"><summary><h3>Nahrazuje aplikace odbornou pomoc?</h3><span class="plus"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M5 12h14"></path><path class="v" d="M12 5v14"></path></svg></span></summary><p>Ne. Mezi námi vám pomáhá začít si povídat. Nenahrazuje psychologickou, terapeutickou ani lékařskou péči. Kontakty na Linku bezpečí a další odbornou pomoc najdete přímo v aplikaci.</p></details>
       </div>
     </div>
@@ -337,8 +339,9 @@
     <h2 class="display h2 reveal" style="font-size:60px;color:#33261F;max-width:760px">O čem si dnes popovídáte?</h2>
     <p class="reveal" style="--d:.12s;font-size:20px;color:#7A6A5F;max-width:520px">Zkuste společně jednu kartu.</p>
     <div class="reveal" style="--d:.24s;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px">
-      <a data-umami-event="store-click-ios" class="btn btn-primary" href="https://apps.apple.com/cz/app/id6791562078">Stáhnout pro iPhone</a>
-      <a class="btn btn-secondary" href="https://app.mezi-nami-app.cz/?lang=cs">Otevřít v prohlížeči</a>
+      <a data-umami-event="klik-appstore-zaver" class="btn btn-primary" href="https://apps.apple.com/cz/app/id6791562078">Stáhnout pro iPhone</a>
+      <a data-umami-event="klik-play-zaver" class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.dalikjebuh.mezinami">Stáhnout pro Android</a>
+      <a data-umami-event="klik-hra-zaver" class="btn btn-secondary" href="https://app.mezi-nami-app.cz/?lang=cs">Otevřít v prohlížeči</a>
     </div>
     <p class="reveal" style="--d:.36s;font-size:15px;color:#A99A8E;max-width:520px">Zdarma a bez reklam. Vaše odpovědi se nikam neukládají.</p>
   </section>
